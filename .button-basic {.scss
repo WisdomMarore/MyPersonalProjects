@@ -1,0 +1,11 @@
+.button-basic {
+    border: 1px solid gray;
+    padding: 10px;
+    background-color: beige;
+
+}
+
+.button report {
+    @extend .button-basic;
+    background-color: blue;
+}

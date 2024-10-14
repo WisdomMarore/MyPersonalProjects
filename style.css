@@ -1,0 +1,96 @@
+/* Add your custom styles here */
+/* This is just a basic example */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+  }
+  
+  header h1 {
+    margin: 0;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  section {
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    color: #333;
+  }
+  
+  form label {
+    display: block;
+    margin-top: 10px;
+    color: #333;
+  }
+  
+  form input[type="text"],
+  form input[type="number"],
+  form textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  form button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  #summary {
+    margin-bottom: 20px;
+  }
+  
+  #summary h3 {
+    color: #333;
+  }
+  
+  #progress-chart {
+    margin-bottom: 20px;
+  }
+  
+  #exercise-history {
+    margin-top: 20px;
+  }
+  
+  #exercise-history select {
+    margin-right: 10px;
+    font-size: 16px;
+    padding: 5px;
+  }
+  
+  #exercise-history button {
+    padding: 5px 10px;
+    font-size: 16px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  

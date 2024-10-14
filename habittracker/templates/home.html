@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Welcome to Habit Tracker</h1>
+    <p>Track your habits, build consistency, and achieve your goals!</p>
+    {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}" class="btn">Go to Dashboard</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn">Get Started</a>
+    {% endif %}
+</div>
+{% endblock %}

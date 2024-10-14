@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Habit Tracker{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero {
+        text-align: center;
+        padding: 3rem 0;
+        background-color: var(--background-color);
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        color: var(--light-text-color);
+        max-width: 600px;
+        margin: 0 auto 2rem;
+    }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+    }
+
+    .feature {
+        flex-basis: calc(33.333% - 2rem);
+        background-color: var(--white);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .feature h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    .feature p {
+        color: var(--light-text-color);
+    }
+
+    .login-section {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .login-section h2 {
+        color: var(--primary-color);
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .login-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+
+    .login-form button {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--secondary-color);
+        color: var(--white);
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+
+    .login-form button:hover {
+        background-color: #e09400;
+    }
+
+    .signup-link {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .signup-link a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+        .feature {
+            flex-basis: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Track Your Habits, Transform Your Life</h1>
+    <p>Join thousands of users who have improved their lives with Habit Tracker</p>
+</div>
+
+<div class="features">
+    <div class="feature">
+        <h3>Easy Tracking</h3>
+        <p>Log your habits with just a tap, making consistency effortless.</p>
+    </div>
+    <div class="feature">
+        <h3>Insightful Analytics</h3>
+        <p>Visualize your progress and identify areas for improvement.</p>
+    </div>
+    <div class="feature">
+        <h3>Goal Setting</h3>
+        <p>Set and achieve your personal goals with our guided approach.</p>
+    </div>
+</div>
+
+<div class="login-section">
+    <h2>Login to Your Account</h2>
+    <form method="post" class="login-form">
+        {% csrf_token %}
+        {% for field in form %}
+            <div>
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit">Login</button>
+    </form>
+    <div class="signup-link">
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+    </div>
+</div>
+{% endblock %}

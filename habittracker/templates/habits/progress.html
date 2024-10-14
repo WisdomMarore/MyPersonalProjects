@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Progress - Habit Tracker{% endblock %}
+
+{% block extra_css %}
+<style>
+    .progress-summary {
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+
+    .summary-stats {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .stat-value {
+        font-size: 2rem;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+
+    .stat-label {
+        color: var(--light-text-color);
+    }
+
+    .habits-progress {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .habit-card {
+        background-color: var(--white);
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    .habit-title {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+    }
+
+    .habit-streak {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--secondary-color);
+        margin-bottom: 10px;
+    }
+
+    .progress-bar {
+        background-color: #e0e0e0;
+        border-radius: 4px;
+        height: 10px;
+        margin-bottom: 10px;
+        overflow: hidden;
+    }
+
+    .progress-bar-fill {
+        background-color: var(--success-color);
+        height: 100%;
+        transition: width 0.3s ease;
+    }
+
+    .habit-stats {
+        display: flex;
+        justify-content: space-between;
+        color: var(--light-text-color);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .recent-progress {
+        margin-top: 15px;
+    }
+
+    .recent-progress h3 {
+        font-size: 1rem;
+        color: var(--text-color);
+        margin-bottom: 10px;
+    }
+
+    .day-progress {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #e0e0e0;
+        color: var(--text-color);
+        font-size: 0.8rem;
+        margin-right: 5px;
+    }
+
+    .day-progress.completed {
+        background-color: var(--success-color);
+        color: var(--white);
+    }
+
+    @media (max-width: 768px) {
+        .summary-stats {
+            flex-direction: column;
+        }
+
+        .stat {
+            margin-bottom: 20px;
+        }
+
+        .habits-progress {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>Your Progress</h1>
+
+<section class="progress-summary">
+    <h2>Overall Progress</h2>
+    <div class="summary-stats">
+        <div class="stat">
+            <div class="stat-value">{{ active_habits_count }}</div>
+            <div class="stat-label">Active Habits</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">{{ overall_completion_rate }}%</div>
+            <div class="stat-label">Completion Rate</div>
+        </div>
+        <div class="stat">
+            <div class="stat-value">{{ longest_streak }}</div>
+            <div class="stat-label">Longest Streak</div>
+        </div>
+    </div>
+</section>
+
+<section class="habits-progress">
+    {% for habit, data in progress_data.items %}
+        <div class="habit-card">
+            <div class="habit-title">{{ habit.name }}</div>
+            <div class="habit-streak">{{ data.current_streak }} day streak</div>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" style="width: {{ data.completion_rate }}%;"></div>
+            </div>
+            <div class="habit-stats">
+                <span>{{ data.completed_days }}/{{ data.total_days }} days</span>
+                <span>{{ data.completion_rate }}% complete</span>
+            </div>
+            <div class="recent-progress">
+                <h3>Last 7 Days</h3>
+                {% for progress in data.recent_progress %}
+                    <span class="day-progress {% if progress.completed %}completed{% endif %}" title="{{ progress.date|date:'Y-m-d' }}">
+                        {{ progress.date|date:'d' }}
+                    </span>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No habits tracked yet. Start adding habits to see your progress!</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

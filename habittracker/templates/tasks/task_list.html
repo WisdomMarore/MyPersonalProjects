@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Task List{% endblock %}
+
+{% block content %}
+    <h2>Task List</h2>
+    <ul class="task-list">
+        {% for task in tasks %}
+            <li class="task-item {% if task.completed %}completed{% endif %}">
+                <h3>{{ task.title }}</h3>
+                <p>{{ task.description }}</p>
+                <div class="task-actions">
+                    <a href="{% url 'toggle_task' task.id %}" class="btn btn-toggle">
+                        {% if task.completed %}Mark Incomplete{% else %}Mark Complete{% endif %}
+                    </a>
+                    <a href="{% url 'delete_task' task.id %}" class="btn btn-delete">Delete</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>No tasks yet.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
